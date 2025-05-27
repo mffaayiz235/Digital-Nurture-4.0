@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Community Event Portal</title>
+
+  <!-- Internal Style for Body Background -->
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+  </style>
+
+  <!-- External CSS Link -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Inline style for red heading -->
+  <h1 style="color: red;">Welcome to the Local Community Event Portal</h1>
+
+  <header id="mainHeader">
+    <h2>Upcoming Events</h2>
+  </header>
+
+  <div class="eventCard">
+    <h3>Clean-Up Drive</h3>
+    <p>Join us this Sunday at the town square.</p>
+  </div>
+
+  <div class="eventCard">
+    <h3>Food Festival</h3>
+    <p>Enjoy cuisines from around the world.</p>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="news">
+    <h2>Community Bulletin</h2>
+    <p>
+      We are pleased to announce new community initiatives to promote sustainability and civic engagement.
+    </p>
+  </section>
+
+  <table>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+      <th>Location</th>
+    </tr>
+    <tr>
+      <td>Clean-Up Drive</td>
+      <td>June 5</td>
+      <td>Town Square</td>
+    </tr>
+    <tr>
+      <td>Food Festival</td>
+      <td>June 12</td>
+      <td>Community Park</td>
+    </tr>
+  </table>
+
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" class="highlighted" />
+  </form>
+
+</body>
+</html>
+
+
+
+*****************************************************external css***********************************
+
+//external css//
+styles.css
+
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header styles */
+#mainHeader {
+  background: linear-gradient(to right, #0066cc, #66ccff);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style for event cards */
+.eventCard {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+/* Style multiple elements together */
+h3, p {
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* Typography and Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Style for main CTA button (example) */
+.cta-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Link styling */
+a:link {
+  color: #007BFF;
+}
+a:visited {
+  color: #551A8B;
+}
+a:hover {
+  color: #FF6347;
+}
+a:active {
+  color: #000;
+}
+
+/* List styling */
+nav ul {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 20px;
+  padding: 0;
+}
+nav ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 10px;
+  text-align: center;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Form field highlight */
+.highlighted {
+  outline: 2px solid #007BFF;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+/* Box Model demo */
+.eventCard {
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  outline: none;
+}
+
+/* Visibility vs Display */
+.hidden-example {
+  visibility: hidden;
+}
+.none-example {
+  display: none;
+}
+
+/* Multi-column layout */
+.news p {
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid gray;
+  padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav ul {
+    display: block;
+    text-align: center;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .eventCard {
+    margin: 10px;
+  }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Exercises - Full Version</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background: lightblue;
+      margin: 10px;
+      display: inline-block;
+    }
+    #colorBox {
+      width: 200px;
+      height: 100px;
+      background: white;
+      margin-top: 10px;
+    }
+    #eventBox {
+      width: 300px;
+      height: 100px;
+      background: lightgray;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Exercise 1: jQuery Inclusion -->
+  <h2>Exercise 1: jQuery Inclusion</h2>
+  <p id="helloWorld">Hello World!</p>
+
+  <!-- Exercise 2: Selecting Elements -->
+  <h2>Exercise 2: Selecting Elements</h2>
+  <h1>Original Heading</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+  <button id="hideParaBtn">Hide Paragraph 1</button>
+
+  <!-- Exercise 3: Common jQuery Methods -->
+  <h2>Exercise 3: jQuery Methods</h2>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div><br><br>
+  <button id="hideBtn">Hide</button>
+  <button id="showBtn">Show</button>
+  <button id="fadeOutBtn">Fade Out</button>
+  <button id="fadeInBtn">Fade In</button>
+  <button id="toggleBtn">Toggle</button>
+  <button id="chainBtn">Chain</button>
+
+  <!-- Exercise 4: DOM Manipulation -->
+  <h2>Exercise 4: DOM Manipulation</h2>
+  <form id="itemForm">
+    <input type="text" id="itemInput" placeholder="Enter item">
+    <button type="submit">Add Item</button>
+  </form>
+  <ul id="itemList"></ul>
+  <button id="removeAll">Remove All</button>
+
+  <!-- Exercise 5: User Interactions -->
+  <h2>Exercise 5: User Interactions</h2>
+  <button id="colorBtn">Change Color</button>
+  <div id="colorBox"></div>
+
+  <!-- Exercise 6: Event Helpers -->
+  <h2>Exercise 6: Event Helpers</h2>
+  <div id="eventBox">Hover, Click or Double-click me!</div><br>
+  <input type="text" id="keyInput" placeholder="Type something...">
+
+  <script>
+    $(document).ready(function() {
+      // Exercise 1: Hello World logging
+      console.log($("#helloWorld").text());
+
+      // Exercise 2: Change h1 text and hide paragraph
+      $("h1").text("Updated Heading");
+      $("#hideParaBtn").click(function() {
+        $("p:first").hide();
+      });
+
+      // Exercise 3: jQuery Methods
+      $("#hideBtn").click(function() {
+        $(".box").hide();
+      });
+      $("#showBtn").click(function() {
+        $(".box").show();
+      });
+      $("#fadeOutBtn").click(function() {
+        $(".box").fadeOut();
+      });
+      $("#fadeInBtn").click(function() {
+        $(".box").fadeIn();
+      });
+      $("#toggleBtn").click(function() {
+        $(".box").toggle();
+      });
+      $("#chainBtn").click(function() {
+        $(".box").slideUp().delay(1000).slideDown();
+      });
+
+      // Exercise 4: DOM Manipulation
+      $("#itemForm").submit(function(e) {
+        e.preventDefault();
+        var item = $("#itemInput").val();
+        if (item) {
+          $("#itemList").append("<li>" + item + "</li>");
+          $("#itemInput").val("");
+        }
+      });
+      $("#removeAll").click(function() {
+        $("#itemList").empty();
+      });
+
+      // Exercise 5: User Interaction Events
+      $("#colorBtn").click(function() {
+        $("#colorBox").css("background-color", "red");
+      });
+      $("#colorBox").dblclick(function() {
+        $(this).css("background-color", "white");
+      });
+
+      // Exercise 6: Event Helpers
+      $("#eventBox").click(function() {
+        $(this).css("background-color", "yellow");
+      });
+      $("#eventBox").dblclick(function() {
+        $(this).css("background-color", "orange");
+      });
+      $("#eventBox").mouseenter(function() {
+        $(this).text("Mouse Entered!");
+      });
+      $("#eventBox").mouseleave(function() {
+        $(this).text("Mouse Left!");
+      });
+      $("#keyInput").keypress(function(event) {
+        alert("Key pressed: " + event.key);
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Community Event Portal</title>
+
+  <!-- 1. Internal CSS for background -->
+  <style>
+    /* Page background */
+    body {
+      background-color: #f0f8ff;
+    }
+  </style>
+
+  <!-- 5. Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- 1. External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 1. Inline CSS -->
+  <h1 style="color: red;">Community Events</h1>
+
+  <!-- 3. ID and Class Example -->
+  <header id="mainHeader">
+    <h2>Welcome to the Event Portal</h2>
+  </header>
+
+  <section class="eventCard">
+    <h3>Food Festival</h3>
+    <p class="description">Join us for local delicacies and cultural performances.</p>
+  </section>
+
+  <!-- 6. List and Link Styling -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 7. Table Styling -->
+  <table>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td>Food Fest</td>
+      <td>June 12</td>
+    </tr>
+    <tr>
+      <td>Music Night</td>
+      <td>June 19</td>
+    </tr>
+  </table>
+
+  <!-- 9. Multi-Column Layout -->
+  <section class="news">
+    <h2>Community Bulletin</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras luctus est in turpis vehicula, eget finibus nunc fermentum.</p>
+    <p>Sed sodales, justo a hendrerit laoreet, sapien est vestibulum justo, in faucibus metus elit a orci.</p>
+  </section>
+
+  <!-- 8. Form for Box Model Example -->
+  <form>
+    <input type="text" placeholder="Your Name" class="highlight">
+    <input type="email" placeholder="Email" class="highlight">
+  </form>
+
+</body>
+</html>
+
+
+********** external css *************************
+
+styles.css
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header styles */
+#mainHeader {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Section and Card styles */
+.eventCard {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+h2 {
+  color: #333333;
+}
+
+h3, p {
+  color: #555555;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Style for main CTA button */
+.cta-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Link styles */
+a:link {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #5a5a5a;
+}
+
+a:hover {
+  color: #ff6600;
+}
+
+a:active {
+  color: #ff0000;
+}
+
+/* List styles */
+nav ul {
+  list-style-type: none;
+  list-style-position: inside;
+  padding: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+nav li {
+  margin: 5px;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* News section - multi-column */
+.news {
+  column-count: 2;
+  column-gap: 30px;
+  column-rule: 1px solid gray;
+  padding: 20px;
+}
+
+/* Box Model and Form styles */
+.highlight {
+  border: 1px solid #ccc;
+  outline: 2px solid #00f2fe;
+  margin: 10px;
+  padding: 10px;
+}
+
+/* Typography */
+.description {
+  text-align: justify;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Optional: Flexbox Example */
+/*
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+*/

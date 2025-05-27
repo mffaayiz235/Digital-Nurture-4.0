@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Community Event Portal</title>
+  <style>
+    /* Internal styling for welcome banner and highlight class */
+    #welcomeBanner {
+      background-color: blue;
+      color: white;
+      padding: 10px;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+    .gallery-img {
+      border: 2px solid #ccc;
+      padding: 5px;
+      width: 100px;
+    }
+    form {
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    function validatePhone(input) {
+      const pattern = /^\d{10}$/;
+      if (!pattern.test(input.value)) {
+        alert("Please enter a valid 10-digit phone number.");
+      }
+    }
+
+    function showFee(select) {
+      document.getElementById("feeDisplay").textContent =
+        "Selected event fee: $" + select.value;
+    }
+
+    function confirmSubmission() {
+      document.getElementById("formOutput").textContent =
+        "Thanks for registering!";
+    }
+
+    function enlargeImage(img) {
+      img.style.width = "300px";
+    }
+
+    function countChars(textarea) {
+      document.getElementById("charCount").textContent =
+        "Characters: " + textarea.value.length;
+    }
+
+    function videoReady() {
+      document.getElementById("videoStatus").textContent = "Video ready to play";
+    }
+
+    window.onbeforeunload = function () {
+      return "Are you sure you want to leave? Changes may not be saved.";
+    };
+
+    function savePreference(select) {
+      localStorage.setItem("preferredEvent", select.value);
+    }
+
+    function loadPreference() {
+      const saved = localStorage.getItem("preferredEvent");
+      if (saved) {
+        document.getElementById("eventType").value = saved;
+      }
+    }
+
+    function clearPrefs() {
+      localStorage.clear();
+      sessionStorage.clear();
+      alert("Preferences cleared.");
+    }
+
+    function findLocation() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          document.getElementById("location").textContent =
+            `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+        },
+        (error) => {
+          alert("Error: " + error.message);
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+  </script>
+</head>
+<body onload="loadPreference()">
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a> |
+    <a href="#events">Events</a> |
+    <a href="#contact">Contact</a> |
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <!-- Main -->
+  <main>
+    <section id="home">
+      <div id="welcomeBanner">
+        Welcome back! <span style="color:red;font-weight:bold;">Special offer today!</span>
+      </div>
+    </section>
+
+    <section id="events">
+      <h2>Upcoming Events</h2>
+
+      <!-- Image Gallery -->
+      <table border="1">
+        <caption>Past Community Events</caption>
+        <tr>
+          <td><img src="event1.jpg" alt="Event 1" title="Festival" class="gallery-img" ondblclick="enlargeImage(this)"></td>
+          <td><img src="event2.jpg" alt="Event 2" title="Cleanup Drive" class="gallery-img" ondblclick="enlargeImage(this)"></td>
+          <td><img src="event3.jpg" alt="Event 3" title="Marathon" class="gallery-img" ondblclick="enlargeImage(this)"></td>
+        </tr>
+        <tr>
+          <td><img src="event4.jpg" alt="Event 4" title="Workshop" class="gallery-img" ondblclick="enlargeImage(this)"></td>
+          <td><img src="event5.jpg" alt="Event 5" title="Fair" class="gallery-img" ondblclick="enlargeImage(this)"></td>
+          <td><img src="event6.jpg" alt="Event 6" title="Music Night" class="gallery-img" ondblclick="enlargeImage(this)"></td>
+        </tr>
+      </table>
+
+      <!-- Registration Form -->
+      <form onsubmit="confirmSubmission(); return false;">
+        <h3>Register for an Event</h3>
+        <label>Name: <input type="text" name="name" placeholder="Enter name" required autofocus></label><br><br>
+        <label>Email: <input type="email" name="email" placeholder="Enter email" required></label><br><br>
+        <label>Phone: <input type="text" name="phone" onblur="validatePhone(this)" placeholder="10-digit number" required></label><br><br>
+        <label>Date: <input type="date" required></label><br><br>
+        <label>Event Type:
+          <select id="eventType" onchange="showFee(this); savePreference(this)">
+            <option value="">Select</option>
+            <option value="10">Workshop</option>
+            <option value="20">Music</option>
+            <option value="15">Sports</option>
+          </select>
+        </label>
+        <div id="feeDisplay" class="highlight"></div><br>
+        <label>Message:<br>
+          <textarea onkeyup="countChars(this)"></textarea>
+        </label>
+        <div id="charCount">Characters: 0</div><br>
+        <button type="submit" onclick="confirmSubmission()">Submit</button>
+        <output id="formOutput"></output>
+      </form>
+
+      <button onclick="clearPrefs()">Clear Preferences</button>
+    </section>
+
+    <section id="contact">
+      <h3>Contact Us</h3>
+      <p>Email: contact@community.org</p>
+    </section>
+
+    <!-- Video Section -->
+    <section>
+      <h3>Event Promo</h3>
+      <video src="promo.mp4" controls oncanplay="videoReady()" width="300"></video>
+      <p id="videoStatus"></p>
+    </section>
+
+    <!-- Geolocation -->
+    <section>
+      <h3>Find Nearby Events</h3>
+      <button onclick="findLocation()">Find Nearby Events</button>
+      <p id="location"></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Local Community Event Portal</p>
+  </footer>
+
+</body>
+</html>

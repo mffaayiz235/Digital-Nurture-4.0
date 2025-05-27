@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Community Event Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .event-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      display: none;
+    }
+    #loading {
+      display: none;
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <h1>Local Community Event Portal</h1>
+
+  <input type="text" id="searchInput" placeholder="Search events by name..." />
+  <select id="categoryFilter">
+    <option value="All">All</option>
+    <option value="Music">Music</option>
+    <option value="Tech">Tech</option>
+  </select>
+
+  <div id="eventContainer"></div>
+
+  <form id="registerForm">
+    <h3>Register for an Event</h3>
+    <input name="name" placeholder="Your Name" required>
+    <input name="email" placeholder="Your Email" required>
+    <select name="eventName" id="eventNameSelect"></select>
+    <button type="submit" id="registerBtn">Register</button>
+    <p class="error" id="formError"></p>
+  </form>
+
+  <p id="loading">Loading events...</p>
+
+  <script>
+    // 1. Basics
+    console.log("Welcome to the Community Portal");
+    window.onload = () => alert("Page fully loaded");
+
+    // 2. Data types and operators
+    let events = [
+      { name: "Music Fest", date: "2025-07-01", seats: 10, category: "Music" },
+      { name: "Tech Talk", date: "2025-06-15", seats: 0, category: "Tech" },
+    ];
+
+    // 4. Closures and HOF
+    function createCategoryTracker() {
+      const counters = {};
+      return function(category) {
+        counters[category] = (counters[category] || 0) + 1;
+        return counters[category];
+      };
+    }
+    const trackRegistration = createCategoryTracker();
+
+    // 5. Constructor and prototype
+    function Event(name, date, seats, category) {
+      this.name = name;
+      this.date = date;
+      this.seats = seats;
+      this.category = category;
+    }
+    Event.prototype.checkAvailability = function() {
+      return this.seats > 0 && new Date(this.date) > new Date();
+    };
+
+    // 6. Arrays and methods
+    function addEvent(name, date, seats, category) {
+      events.push(new Event(name, date, seats, category));
+    }
+
+    // 3. Conditionals and loops
+    function renderEvents(eventList) {
+      const container = document.getElementById("eventContainer");
+      const select = document.getElementById("eventNameSelect");
+      container.innerHTML = "";
+      select.innerHTML = "";
+      eventList.forEach(event => {
+        if (event.checkAvailability && !event.checkAvailability()) return;
+        const card = document.createElement("div");
+        card.className = "event-card";
+        card.innerHTML = `
+          <h3>${event.name}</h3>
+          <p>Date: ${event.date}</p>
+          <p>Seats: ${event.seats}</p>
+          <button onclick="register('${event.name}')">Register</button>
+        `;
+        container.appendChild(card);
+        $("#eventContainer .event-card").fadeIn();
+
+        const option = document.createElement("option");
+        option.value = event.name;
+        option.textContent = event.name;
+        select.appendChild(option);
+      });
+    }
+
+    // 7. DOM update on action
+    function register(name) {
+      try {
+        const event = events.find(e => e.name === name);
+        if (!event || event.seats <= 0) throw new Error("Event full or not found.");
+        event.seats--;
+        alert(`Registered for ${name}!`);
+        trackRegistration(event.category);
+        renderEvents(events);
+      } catch (e) {
+        alert("Error: " + e.message);
+      }
+    }
+
+    // 8. Event handling
+    document.getElementById("categoryFilter").addEventListener("change", function() {
+      const cat = this.value;
+      const filtered = cat === "All" ? events : events.filter(e => e.category === cat);
+      renderEvents(filtered);
+    });
+
+    document.getElementById("searchInput").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const val = this.value.toLowerCase();
+        const filtered = events.filter(e => e.name.toLowerCase().includes(val));
+        renderEvents(filtered);
+      }
+    });
+
+    // 11. Forms
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const eventName = this.eventName.value;
+      const error = document.getElementById("formError");
+
+      if (!name || !email || !eventName) {
+        error.textContent = "All fields are required.";
+        return;
+      }
+      error.textContent = "";
+
+      // 12. AJAX / Fetch
+      const payload = { name, email, event: eventName };
+      console.log("Submitting registration:", payload);
+      document.getElementById("loading").style.display = "block";
+
+      setTimeout(() => {
+        fetch("https://mockapi.io/fake-endpoint", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        .then(res => {
+          if (!res.ok) throw new Error("Failed to register");
+          return res.json();
+        })
+        .then(() => alert("Successfully registered!"))
+        .catch(err => alert("Error: " + err.message))
+        .finally(() => document.getElementById("loading").style.display = "none");
+      }, 1000);
+    });
+
+    // 9 & 10. Async/Await + Modern JS
+    async function loadEvents() {
+      document.getElementById("loading").style.display = "block";
+      try {
+        // Simulated fetch
+        const response = await fetch("https://mockapi.io/fake-events");
+        const data = await response.json();
+        events = [...events, ...data]; // 10. Spread operator
+      } catch (err) {
+        console.error("Failed to fetch events", err);
+      } finally {
+        document.getElementById("loading").style.display = "none";
+        renderEvents(events);
+      }
+    }
+
+    // 13. Debugging
+    console.log("Initial Events:", events);
+    renderEvents(events);
+
+    // 14. jQuery & frameworks
+    $('#registerBtn').click(() => console.log("Register button clicked via jQuery"));
+    // .fadeIn() is used above for event cards
+    // One benefit of frameworks like React: "Helps create dynamic UIs with reusable components and efficient state management."
+
+  </script>
+</body>
+</html>
